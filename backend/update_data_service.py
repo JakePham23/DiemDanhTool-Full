@@ -134,6 +134,25 @@ def perform_update_data_pipeline(driver, wait, username, password):
                         "glv2": glv2
                     })
 
+        # 0. Dọn dẹp các file cache điểm danh cũ
+        try:
+            for fname in os.listdir(BACKEND_OUTPUT_DIR):
+                if fname.startswith("cache_dd_") and fname.endswith(".json"):
+                    os.remove(os.path.join(BACKEND_OUTPUT_DIR, fname))
+            print("🧹 [UPDATE] Đã dọn dẹp các file cache điểm danh cũ.", flush=True)
+        except Exception as err:
+            print(f"⚠️ Không thể dọn cache điểm danh: {err}", flush=True)
+
+        # 0.1 Cập nhật options_data.json cho Dropdown Điểm danh & Điểm danh nhanh
+        try:
+            from getHTML import getInitOptions
+            options_res = getInitOptions(driver, wait, password, "https://ccamspro.thongtinxuanloc.com/admin/diem-danh")
+            if options_res and isinstance(options_res, dict) and "nienhocs" in options_res:
+                save_json_both("options_data.json", options_res)
+                print("✅ [UPDATE] Đã làm mới options_data.json", flush=True)
+        except Exception as opt_err:
+            print(f"⚠️ Không thể làm mới options_data.json: {opt_err}", flush=True)
+
         # Lưu dashboard_data.json
         if dashboard_data:
             save_json_both("dashboard_data.json", dashboard_data)

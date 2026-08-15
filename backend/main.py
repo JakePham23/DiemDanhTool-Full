@@ -397,7 +397,17 @@ def scrape_grade_detail(config: ScrapeConfig):
 
 @app.get("/api/scrape/diemdanh/init")
 async def get_diemdanh_options():
-    """Endpoint lấy options khởi tạo (Tái sử dụng browser, chỉ đăng nhập 1 lần)"""
+    """Endpoint lấy options khởi tạo (Đọc từ file JSON cache, siêu nhanh < 5ms)"""
+    try:
+        options_path = 'output_hocvien_data/options_data.json'
+        if os.path.exists(options_path):
+            with open(options_path, 'r', encoding='utf-8') as f:
+                result = json.load(f)
+            return {"status": "success", "data": result}
+    except Exception as err:
+        print(f"⚠️ Lỗi đọc options_data.json: {err}")
+
+    # Nếu chưa có file cache thì mới cào bằng Selenium
     async with browser_manager.lock:
         try:
             browser_manager.ensure_logged_in(FIXED_USERNAME, FIXED_PASSWORD)
@@ -406,23 +416,43 @@ async def get_diemdanh_options():
             if isinstance(result, dict) and "error" in result:
                 raise HTTPException(status_code=400, detail=result.get("error"))
 
+            # Lưu cache lại
+            try:
+                from update_data_service import save_json_both
+                save_json_both("options_data.json", result)
+            except Exception:
+                pass
+
             return {"status": "success", "data": result}
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Lỗi Server: {str(e)}")
 
-# --- ENDPOINT QUAN TRỌNG ĐÃ TỐI ƯU ---
+# --- ENDPOINT ĐIỂM DANH THEO LỚP & NGÀY (CÓ CACHE JSON) ---
 @app.post("/api/scrape/diemdanh/data")
 async def scrape_diemdanh_data(config: ScrapeConfig, background_tasks: BackgroundTasks):
     """
     Endpoint CÀO DỮ LIỆU ĐIỂM DANH:
-    1. Sử dụng Browser đã login sẵn (siêu nhanh, chỉ đăng nhập 1 lần).
-    2. Chỉ đăng nhập lại khi bị out phiên.
-    3. Có cơ chế khóa (Lock) để tránh xung đột.
+    1. Đọc từ file JSON cache nếu lớp này đã được tải trước đó.
+    2. Nếu chưa có cache: cào qua Selenium và tự động lưu JSON cache.
+    3. Khi Tổng quan cập nhật: toàn bộ cache này sẽ được xóa để tải lại mới nhất.
     """
+    try:
+        # Tạo tên file cache duy nhất theo url_navigation
+        clean_key = slugify_key(config.url_navigation.replace('/', '_').replace('?', '_').replace('&', '_').replace('=', '_'))
+        cache_path = os.path.join('output_hocvien_data', f"cache_dd_{clean_key}.json")
+
+        if os.path.exists(cache_path):
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                cached_data = json.load(f)
+            print(f"⚡ [CACHE HIT] Đọc điểm danh từ cache JSON: {cache_path}")
+            return {"status": "success", "data": cached_data, "count": len(cached_data) if isinstance(cached_data, list) else 0, "from_cache": True}
+    except Exception as e:
+        print(f"⚠️ Lỗi đọc cache điểm danh: {e}")
+
     async with browser_manager.lock:
         try:
             browser_manager.ensure_logged_in(FIXED_USERNAME, FIXED_PASSWORD)
-            print(f"⚡ [API] Nhận request scrape: {config.url_navigation}")
+            print(f"⚡ [SCRAPE] Cào dữ liệu điểm danh từ CCAMS: {config.url_navigation}")
             
             result = getListDiemDanhByInfo(browser_manager.driver, browser_manager.wait, config.url_navigation)
 
@@ -434,6 +464,15 @@ async def scrape_diemdanh_data(config: ScrapeConfig, background_tasks: Backgroun
                     result = getListDiemDanhByInfo(browser_manager.driver, browser_manager.wait, config.url_navigation)
                 else:
                     raise HTTPException(status_code=400, detail=result.get("error"))
+
+            # Lưu vào file cache JSON để lần sau mở ngay tức thì
+            try:
+                clean_key = slugify_key(config.url_navigation.replace('/', '_').replace('?', '_').replace('&', '_').replace('=', '_'))
+                cache_path = os.path.join('output_hocvien_data', f"cache_dd_{clean_key}.json")
+                with open(cache_path, 'w', encoding='utf-8') as f:
+                    json.dump(result, f, ensure_ascii=False, indent=2)
+            except Exception as save_err:
+                print(f"⚠️ Lỗi lưu cache điểm danh: {save_err}")
 
             # --- BACKGROUND TASKS ---
             background_tasks.add_task(save_to_file_task, result, config.url_navigation)
