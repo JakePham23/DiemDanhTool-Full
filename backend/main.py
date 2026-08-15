@@ -271,11 +271,10 @@ async def lifespan(app: FastAPI):
 # --- 3. KHỞI TẠO APP FASTAPI (CHỈ 1 LẦN DUY NHẤT) ---
 app = FastAPI(title="CCAMS Scraper API", lifespan=lifespan)
 
-# Cấu hình CORS
-origins = ["http://localhost:3000", "http://127.0.0.1:3000", "https://diemdanhd2tool.vercel.app"]
+# Cấu hình CORS mở rộng cho Cloudflare Tunnel, Vercel và Localhost
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origin_regex=r"https?://.*",
     allow_credentials=True,
     allow_methods=["*"],    
     allow_headers=["*"],
