@@ -1,0 +1,134 @@
+[
+    {
+        "stt": "1",
+        "ten_lop": "Chiên Con 1",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=1&MALOPHOC=39",
+        "nam": "21",
+        "nu": "20",
+        "tong": "41",
+        "chu_nhiem": "Maria Nguyễn Thị Tâm",
+        "glv1": "Maria Nguyễn Thị Khánh Ly",
+        "glv2": "Maria Trần Bảo Ngọc"
+    },
+    {
+        "stt": "2",
+        "ten_lop": "Chiên Con 2",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=1&MALOPHOC=40",
+        "nam": "15",
+        "nu": "16",
+        "tong": "31",
+        "chu_nhiem": "Maria Tạ Thị Thuỳ Trang",
+        "glv1": "Giuse Nguyễn Đức Huy",
+        "glv2": "Giuse Trần Huy Hoàng"
+    },
+    {
+        "stt": "3",
+        "ten_lop": "Ấu Nhi 1A",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=2&MALOPHOC=41",
+        "nam": "10",
+        "nu": "13",
+        "tong": "23",
+        "chu_nhiem": "Maria Tạ Thị Thanh Huệ",
+        "glv1": "Têrêsa Lê Thanh Vy",
+        "glv2": "Giuse Đinh Sĩ Luân"
+    },
+    {
+        "stt": "4",
+        "ten_lop": "Ấu Nhi 1B",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=2&MALOPHOC=42",
+        "nam": "19",
+        "nu": "8",
+        "tong": "27",
+        "chu_nhiem": "Maria Trần Thị Kim Mai",
+        "glv1": "Gioan.b Nguyễn Vũ Hoàng Phúc",
+        "glv2": "Vinhsơn Phạm Vũ Minh Nhật"
+    },
+    {
+        "stt": "5",
+        "ten_lop": "Ấu Nhi 2",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=2&MALOPHOC=43",
+        "nam": "11",
+        "nu": "16",
+        "tong": "27",
+        "chu_nhiem": "Maria Nguyễn Hương Xuân",
+        "glv1": "Sr. Maria Ngô Thị Minh Tâm",
+        "glv2": "Maria Nguyễn Thị Quỳnh Anh"
+    },
+    {
+        "stt": "6",
+        "ten_lop": "Ấu Nhi 3",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=2&MALOPHOC=44",
+        "nam": "7",
+        "nu": "18",
+        "tong": "25",
+        "chu_nhiem": "Maria Bùi Thị Tuyết Lan",
+        "glv1": "Sr. Maria Huỳnh Thị Kiều Linh",
+        "glv2": "Giuse Nguyễn Trần Tiến"
+    },
+    {
+        "stt": "7",
+        "ten_lop": "Thiếu Nhi 1",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=3&MALOPHOC=45",
+        "nam": "16",
+        "nu": "21",
+        "tong": "37",
+        "chu_nhiem": "Maria Phạm Minh Anh",
+        "glv1": "Sr. Maria Trần Hoàng Uyên",
+        "glv2": "Savio Phạm Tấn Nghĩa"
+    },
+    {
+        "stt": "8",
+        "ten_lop": "Thiếu Nhi 2",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=3&MALOPHOC=46",
+        "nam": "22",
+        "nu": "18",
+        "tong": "40",
+        "chu_nhiem": "Maria Nguyễn Thị Thuý",
+        "glv1": "Sr. Matta Nguyễn Thị Thu",
+        "glv2": "Maria Nguyễn Thị Mai Thy"
+    },
+    {
+        "stt": "9",
+        "ten_lop": "Thiếu Nhi 3",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=3&MALOPHOC=47",
+        "nam": "19",
+        "nu": "15",
+        "tong": "34",
+        "chu_nhiem": "Maria Nguyễn Thị Na",
+        "glv1": "Sr. Lucia Trần Thị Ánh Tuyết",
+        "glv2": "Phaolô Nguyễn Tấn Lộc"
+    },
+    {
+        "stt": "10",
+        "ten_lop": "Nghĩa Sĩ",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=4&MALOPHOC=49",
+        "nam": "24",
+        "nu": "25",
+        "tong": "49",
+        "chu_nhiem": "Maria Phạm Phương Anh",
+        "glv1": "Sr. Maria Phạm Thị Thu Hằng",
+        "glv2": "Giuse Nguyễn Hà Thiên Phước"
+    },
+    {
+        "stt": "11",
+        "ten_lop": "Hiệp Sĩ",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=5&MALOPHOC=50",
+        "nam": "29",
+        "nu": "15",
+        "tong": "44",
+        "chu_nhiem": "Maria Đỗ Thị Huế",
+        "glv1": "Sr. Anna Nguyễn Thị Kim Oanh",
+        "glv2": "Maria Vũ Thị Thanh Kiều"
+    },
+    {
+        "stt": "12",
+        "ten_lop": "Dự Trưởng",
+        "url_chi_tiet": "MANIENHOC=4&MAKHOI=6&MALOPHOC=48",
+        "nam": "0",
+        "nu": "0",
+        "tong": "0",
+        "chu_nhiem": "",
+        "glv1": "",
+        "glv2": ""
+    }
+]

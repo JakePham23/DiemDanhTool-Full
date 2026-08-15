@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+selenium
+chromium
+webdriver_py
+beautifulsoup4
+pandas
+lxml

@@ -1,0 +1,142 @@
+{
+    "nienhocs": [
+        {
+            "MANIENHOC": "4",
+            "TENNIENHOC": "2025-2026"
+        },
+        {
+            "MANIENHOC": "3",
+            "TENNIENHOC": "2024-2025"
+        },
+        {
+            "MANIENHOC": "2",
+            "TENNIENHOC": "2023-2024"
+        },
+        {
+            "MANIENHOC": "1",
+            "TENNIENHOC": "2022-2023"
+        }
+    ],
+    "khois": [
+        {
+            "MAKHOI": "1",
+            "TENKHOI": "Chiên Con"
+        },
+        {
+            "MAKHOI": "2",
+            "TENKHOI": "Ấu Nhi"
+        },
+        {
+            "MAKHOI": "3",
+            "TENKHOI": "Thiếu Nhi"
+        },
+        {
+            "MAKHOI": "4",
+            "TENKHOI": "Nghĩa Sĩ"
+        },
+        {
+            "MAKHOI": "5",
+            "TENKHOI": "Hiệp Sĩ"
+        },
+        {
+            "MAKHOI": "6",
+            "TENKHOI": "Dự Trưởng"
+        },
+        {
+            "MAKHOI": "7",
+            "TENKHOI": "Tông Đồ"
+        }
+    ],
+    "lophocs": [
+        {
+            "MALOPHOC": "39",
+            "TENLOPHOC": "Chiên Con 1"
+        },
+        {
+            "MALOPHOC": "40",
+            "TENLOPHOC": "Chiên Con 2"
+        },
+        {
+            "MALOPHOC": "41",
+            "TENLOPHOC": "Ấu Nhi 1A"
+        },
+        {
+            "MALOPHOC": "42",
+            "TENLOPHOC": "Ấu Nhi 1B"
+        },
+        {
+            "MALOPHOC": "43",
+            "TENLOPHOC": "Ấu Nhi 2"
+        },
+        {
+            "MALOPHOC": "44",
+            "TENLOPHOC": "Ấu Nhi 3"
+        },
+        {
+            "MALOPHOC": "45",
+            "TENLOPHOC": "Thiếu Nhi 1"
+        },
+        {
+            "MALOPHOC": "46",
+            "TENLOPHOC": "Thiếu Nhi 2"
+        },
+        {
+            "MALOPHOC": "47",
+            "TENLOPHOC": "Thiếu Nhi 3"
+        },
+        {
+            "MALOPHOC": "49",
+            "TENLOPHOC": "Nghĩa Sĩ"
+        },
+        {
+            "MALOPHOC": "50",
+            "TENLOPHOC": "Hiệp Sĩ"
+        },
+        {
+            "MALOPHOC": "48",
+            "TENLOPHOC": "Dự Trưởng"
+        }
+    ],
+    "diemdanhtypes": [
+        {
+            "VALUE": "hiendien_all",
+            "TENLOAI": "Hiển thị tất cả hiện diện"
+        },
+        {
+            "VALUE": "hiendien_tle",
+            "TENLOAI": "Hiện diện Thánh lễ"
+        },
+        {
+            "VALUE": "hiendien_gly",
+            "TENLOAI": "Hiện diện Giáo lý"
+        },
+        {
+            "VALUE": "hiendien_chau",
+            "TENLOAI": "Hiện diện chầu Thánh Thể"
+        },
+        {
+            "VALUE": "hiendien_xungtoi",
+            "TENLOAI": "Hiện diện Xưng tội"
+        },
+        {
+            "VALUE": "vang_all",
+            "TENLOAI": "Hiển thị tất cả vắng có phép"
+        },
+        {
+            "VALUE": "vang_tle",
+            "TENLOAI": "Vắng có phép Thánh lễ"
+        },
+        {
+            "VALUE": "vang_gly",
+            "TENLOAI": "Vắng có phép Giáo lý"
+        },
+        {
+            "VALUE": "vang_chau",
+            "TENLOAI": "Vắng có phép chầu Thánh Thể"
+        },
+        {
+            "VALUE": "vang_xungtoi",
+            "TENLOAI": "Vắng có phép Xưng tội"
+        }
+    ]
+}
