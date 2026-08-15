@@ -191,6 +191,20 @@ def start_frontend():
                 stderr=log_file
             )
             print(f"✅ [FRONTEND] Đã kích hoạt Next.js Frontend nền thành công (Log tại {log_path})!")
+
+            def check_frontend_status():
+                time.sleep(3)
+                if frontend_process and frontend_process.poll() is not None:
+                    print(f"❌ [FRONTEND] Frontend bị dừng bất thường (Mã thoát: {frontend_process.returncode})!")
+                    try:
+                        with open(log_path, "r", encoding="utf-8") as f:
+                            err_content = f.read().strip()
+                            if err_content:
+                                print(f"📋 [FRONTEND LOG LỖI]:\n{err_content}\n---")
+                    except Exception:
+                        pass
+
+            threading.Thread(target=check_frontend_status, daemon=True).start()
         except Exception as e:
             print(f"⚠️ [FRONTEND] Không thể tự khởi động frontend: {e}")
 
