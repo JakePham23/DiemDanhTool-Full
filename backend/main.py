@@ -44,6 +44,25 @@ HOME_DIR = os.path.expanduser("~")
 STAGING_DIR = os.path.join(HOME_DIR, "pipeline_data", "staging")
 os.makedirs(STAGING_DIR, exist_ok=True)
 
+def find_chrome_binary():
+    import shutil
+    candidates = [
+        shutil.which("google-chrome"),
+        shutil.which("google-chrome-stable"),
+        shutil.which("chromium"),
+        shutil.which("chromium-browser"),
+        "/usr/bin/google-chrome",
+        "/usr/bin/google-chrome-stable",
+        "/usr/bin/chromium-browser",
+        "/usr/bin/chromium",
+        "/snap/bin/chromium",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    ]
+    for path in candidates:
+        if path and os.path.exists(path):
+            return path
+    return None
+
 # --- 1. CLASS QUẢN LÝ BROWSER (SINGLETON) ---
 class BrowserManager:
     def __init__(self):
@@ -58,6 +77,13 @@ class BrowserManager:
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
         
+        chrome_bin = find_chrome_binary()
+        if chrome_bin:
+            print(f"🌐 [CHROME] Sử dụng Chrome binary tại: {chrome_bin}")
+            options.binary_location = chrome_bin
+        else:
+            print("⚠️ [CHROME] Không tìm thấy Chrome binary trên máy. Nếu gặp lỗi, vui lòng cài google-chrome hoặc chromium-browser.")
+
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         self.wait = WebDriverWait(self.driver, 10)
 
