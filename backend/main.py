@@ -146,15 +146,43 @@ def start_frontend():
 
     frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
     if os.path.exists(frontend_dir):
-        print("🚀 [FRONTEND] Đang tự động khởi động Next.js Frontend trên cổng 3000...")
-        node_path = "/Users/jakepham/.nvm/versions/node/v22.20.0/bin"
-        npm_bin = os.path.join(node_path, "npm") if os.path.exists(os.path.join(node_path, "npm")) else "npm"
-        
+        print("🚀 [FRONTEND] Đang khởi động Next.js Frontend trên cổng 3000...")
+        import shutil
+
+        # Tìm đường dẫn npm động (hỗ trợ Linux, macOS, nvm, homebrew)
+        npm_bin = shutil.which("npm")
+        if not npm_bin:
+            common_paths = [
+                os.path.expanduser("~/.nvm/versions/node/v22.20.0/bin/npm"),
+                "/usr/local/bin/npm",
+                "/opt/homebrew/bin/npm",
+                "/usr/bin/npm"
+            ]
+            for p in common_paths:
+                if os.path.exists(p):
+                    npm_bin = p
+                    break
+
+        if not npm_bin:
+            npm_bin = "npm"
+
         env = os.environ.copy()
-        env["PATH"] = f"{node_path}:{env.get('PATH', '')}"
-        
+        if "/" in npm_bin:
+            node_dir = os.path.dirname(npm_bin)
+            env["PATH"] = f"{node_dir}:{env.get('PATH', '')}"
+
+        # Kiểm tra node_modules
+        node_modules_path = os.path.join(frontend_dir, "node_modules")
+        if not os.path.exists(node_modules_path):
+            print("📦 [FRONTEND] Chưa có node_modules, đang tự động chạy npm install...")
+            try:
+                subprocess.run([npm_bin, "install"], cwd=frontend_dir, env=env, check=True)
+            except Exception as err:
+                print(f"⚠️ [FRONTEND] Lỗi chạy npm install: {err}")
+
         try:
-            log_file = open("/tmp/frontend_dev.log", "w", encoding="utf-8")
+            log_path = os.path.join(os.path.dirname(__file__), "frontend_dev.log")
+            log_file = open(log_path, "w", encoding="utf-8")
             frontend_process = subprocess.Popen(
                 [npm_bin, "run", "dev"],
                 cwd=frontend_dir,
@@ -162,7 +190,7 @@ def start_frontend():
                 stdout=log_file,
                 stderr=log_file
             )
-            print("✅ [FRONTEND] Đã kích hoạt Next.js Frontend nền thành công (Log tại /tmp/frontend_dev.log)!")
+            print(f"✅ [FRONTEND] Đã kích hoạt Next.js Frontend nền thành công (Log tại {log_path})!")
         except Exception as e:
             print(f"⚠️ [FRONTEND] Không thể tự khởi động frontend: {e}")
 
