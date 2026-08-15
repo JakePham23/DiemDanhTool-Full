@@ -88,33 +88,49 @@ cp .env.example frontend/.env.local
 
 ---
 
-### 3. Chạy Backend (FastAPI Server)
+### 3. Khởi Chạy Dự Án
 
-1. Đảm bảo đã kích hoạt `.venv` (thấy dấu `(.venv)` ở đầu dòng lệnh terminal).
-2. Di chuyển vào thư mục backend và chạy server:
+Hệ thống đã được tích hợp cơ chế **tự động khởi động Frontend khi bật Backend**.
+
+#### 🌟 Cách 1: Chạy 1 Lệnh Tự Động Toàn Bộ (Khuyên Dùng)
+Chỉ cần chạy Backend, FastAPI sẽ **tự động kích hoạt Next.js Frontend (Port 3000)** và tự động mở trình duyệt:
+
+1. Kích hoạt môi trường Python (Conda hoặc venv):
+   ```bash
+   conda activate venv_common
+   # hoặc: source .venv/bin/activate
+   ```
+2. Vào thư mục `backend` và chạy:
    ```bash
    cd backend
-   uvicorn main:app --reload --port 3001
+   python main.py
+   # Hoặc: uvicorn main:app --reload --port 3001
    ```
-3. API Documentation (Swagger UI) sẽ có tại: `http://localhost:3001/docs`
+3. Hệ thống sẽ tự động:
+   - ✅ Bật Backend API tại `http://localhost:3001`
+   - ✅ Kích hoạt Next.js Frontend nền tại `http://localhost:3000` (Log lưu tại `/tmp/frontend_dev.log`)
+   - ✅ Tự mở trình duyệt truy cập `http://localhost:3000/dibu`
+   - ✅ Tự động đóng cả Frontend khi bạn dừng Backend (`Ctrl + C`).
 
 ---
 
-### 4. Chạy Frontend (Next.js)
+#### 🛠️ Cách 2: Chạy Thủ Công Từng Phần (Dành cho Debug / Phát triển Frontend)
+Nếu bạn muốn xem trực tiếp log giao diện của Next.js:
 
-1. Mở một cửa sổ terminal mới và di chuyển vào thư mục `frontend`:
-   ```bash
-   cd frontend
-   ```
-2. Cài đặt các gói phụ thuộc Node.js:
-   ```bash
-   npm install
-   ```
-3. Khởi chạy môi trường phát triển:
-   ```bash
-   npm run dev
-   ```
-4. Truy cập giao diện web tại: `http://localhost:3000`
+- **Terminal 1 (Backend):**
+  ```bash
+  conda activate venv_common
+  cd backend
+  uvicorn main:app --reload --port 3001
+  ```
+
+- **Terminal 2 (Frontend):**
+  ```bash
+  cd frontend
+  npm install
+  npm run dev
+  ```
+  Truy cập giao diện: `http://localhost:3000`
 
 ---
 
