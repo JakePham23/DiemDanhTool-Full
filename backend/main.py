@@ -34,11 +34,11 @@ from dibu_service import scrape_attendance_by_range, build_dibu_summary
 
 load_dotenv()
 
-# --- CẤU HÌNH ---
-FIXED_USERNAME = "glvloc" # Hoặc lấy từ os.getenv
-FIXED_PASSWORD = "0368079841"
-BASE_URL = 'https://ccamspro.thongtinxuanloc.com'
-DIEMDANH_BASE_URL = 'https://ccamspro.thongtinxuanloc.com/admin/diem-danh'
+# --- CẤU HÌNH ĐĂNG NHẬP CCAMS ---
+FIXED_USERNAME = os.getenv("CCAMS_USERNAME", "glvloc")
+FIXED_PASSWORD = os.getenv("CCAMS_PASSWORD", "0368079841")
+BASE_URL = os.getenv("CCAMS_BASE_URL", "https://ccamspro.thongtinxuanloc.com")
+DIEMDANH_BASE_URL = f"{BASE_URL}/admin/diem-danh"
 
 HOME_DIR = os.path.expanduser("~") 
 STAGING_DIR = os.path.join(HOME_DIR, "pipeline_data", "staging")
