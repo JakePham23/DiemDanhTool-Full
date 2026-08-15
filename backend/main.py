@@ -184,13 +184,13 @@ def start_frontend():
             log_path = os.path.join(os.path.dirname(__file__), "frontend_dev.log")
             log_file = open(log_path, "w", encoding="utf-8")
             frontend_process = subprocess.Popen(
-                [npm_bin, "run", "dev"],
+                [npm_bin, "run", "dev", "--", "-p", "3000", "-H", "0.0.0.0"],
                 cwd=frontend_dir,
                 env=env,
                 stdout=log_file,
                 stderr=log_file
             )
-            print(f"✅ [FRONTEND] Đã kích hoạt Next.js Frontend nền thành công (Log tại {log_path})!")
+            print(f"✅ [FRONTEND] Đã kích hoạt Next.js Frontend nền (Port 3000, Host 0.0.0.0 - Log: {log_path})!")
 
             def check_frontend_status():
                 time.sleep(3)
