@@ -2,8 +2,17 @@
 import axios from "axios";
 import { toast } from "sonner";
 
+const getBaseURL = () => {
+  const backend = process.env.NEXT_PUBLIC_API_BACKEND;
+  if (backend && backend.trim()) {
+    const raw = backend.trim().replace(/\/+$/, "");
+    return raw.endsWith("/api") ? raw : `${raw}/api`;
+  }
+  return "/api";
+};
+
 const instance = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_BACKEND}/api/`,
+  baseURL: getBaseURL(),
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
