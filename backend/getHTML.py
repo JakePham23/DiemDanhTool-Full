@@ -61,8 +61,8 @@ def scraper():
     BASE_URL = 'https://ccamspro.thongtinxuanloc.com/admin'
     LOGIN_URL = BASE_URL
     DASHBOARD_URL = BASE_URL# + '/admin'
-    username = 'glvloc'
-    password = '0368079841'
+    username = os.getenv("CCAMS_USERNAME", "")
+    password = os.getenv("CCAMS_PASSWORD", "")
     OUTPUT_DIR = 'data_hocvien'
     FINAL_OUTPUT_FILE = 'tat_ca_hoc_vien.xlsx'
 
@@ -454,9 +454,9 @@ def getInitOptions(driver_or_url=None, wait_or_user=None, password=None, DIEMDAN
         if "login" in driver.current_url:
             print("🔑 [getInitOptions] Phiên hết hạn, đang đăng nhập...")
             username_field = wait.until(EC.presence_of_element_located((By.ID, "email")))
-            username_field.send_keys(wait_or_user or "glvloc")
+            username_field.send_keys(wait_or_user or os.getenv("CCAMS_USERNAME", ""))
             password_field = wait.until(EC.presence_of_element_located((By.ID, "password")))
-            password_field.send_keys(password or "0368079841")
+            password_field.send_keys(password or os.getenv("CCAMS_PASSWORD", ""))
             login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
             login_button.click()
             wait.until(EC.url_contains("/admin"))

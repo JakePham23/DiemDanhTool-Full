@@ -3,8 +3,8 @@ from urllib.parse import urlencode, parse_qs, urlparse
 import json  # Cần cho việc ghi file JSON
 import os  # Cần cho việc tạo thư mục
 
-FIXED_USERNAME = 'glvloc'
-FIXED_PASSWORD = '0368079841'
+FIXED_USERNAME = os.getenv("CCAMS_USERNAME", "")
+FIXED_PASSWORD = os.getenv("CCAMS_PASSWORD", "")
 
 
 def create_encoded_url(path, params):
